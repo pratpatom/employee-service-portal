@@ -30,3 +30,24 @@ setGlobalOptions({ maxInstances: 10 });
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+
+export const health = onRequest((request, response) => {
+    if (request.method !== 'GET') {
+        response
+            .status(405)
+            .set('ALLOW', 'GET')
+            .send("Method not allow")
+        return
+    }
+
+    logger.info("Health check called.", {structuredData: true})
+
+    response
+        .status(200)
+        .set('Content-Type', 'application/json')
+        .set('Cache-Control', 'no-store')
+        .json({
+        "status": "Healthy",
+        "timestamp": new Date().toISOString()
+    })
+})
