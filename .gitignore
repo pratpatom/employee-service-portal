@@ -1,0 +1,6 @@
+.env
+.env.local
+client/node_modules/
+client/dist/
+dataconnect-debug.log
+pglite-debug.log
